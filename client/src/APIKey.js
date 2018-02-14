@@ -1,1 +1,1 @@
-const APIKey = 'Nice try, pumpkin!!';
+const APIKey = 'Nice try, pumpkin!';
