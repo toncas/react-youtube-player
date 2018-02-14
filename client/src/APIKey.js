@@ -1,1 +1,0 @@
-const APIKey = 'Nice try, pumpkin!';
