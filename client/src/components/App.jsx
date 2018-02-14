@@ -9,31 +9,41 @@ class App extends Component {
 
     this.state = {
       testMessage: '',
-      currentVideo: {},
+      currentVideo: {
+        snippet: {
+          title: '',
+        },
+
+        id: {
+          videoId: '',
+        }
+      },
       searchResultVideoLists: [],
     };
+
+    youtubeApi.getSearchResults.bind(this);
 
   }
 
   componentDidMount() {
     //set default states
-    youtubeApi.testAxios(null, (res) => {
+
+    youtubeApi.getSearchResults('alpha investments', res => {
       this.setState({
-        testMessage: `${res.data.message} ${res.data.subtitle}`,
+        searchResultVideoLists: res.data.items,
+        currentVideo: res.data.items[0],
       });
     });
-
-    youtubeApi.getSearchResults('alpha investments', function(res) {
-      console.log(res);
-    })
-
   }
 
   render() {
     return (
       <div>
+        <div className='search-bar'>
+          {`SEARCHBAR GOES HERE`}
+        </div>
         <div className='video-player'>
-          <VideoPlayer testMessage={this.state.testMessage} currentVideo={this.state.currentVideo}/>
+          <VideoPlayer currentVideo={this.state.currentVideo}/>
         </div>
       </div>
     );

@@ -18305,9 +18305,19 @@ var App = function (_Component) {
 
     _this.state = {
       testMessage: '',
-      currentVideo: {},
+      currentVideo: {
+        snippet: {
+          title: ''
+        },
+
+        id: {
+          videoId: ''
+        }
+      },
       searchResultVideoLists: []
     };
+
+    _YoutubeApi2.default.getSearchResults.bind(_this);
 
     return _this;
   }
@@ -18318,14 +18328,12 @@ var App = function (_Component) {
       var _this2 = this;
 
       //set default states
-      _YoutubeApi2.default.testAxios(null, function (res) {
-        _this2.setState({
-          testMessage: res.data.message + ' ' + res.data.subtitle
-        });
-      });
 
       _YoutubeApi2.default.getSearchResults('alpha investments', function (res) {
-        console.log(res);
+        _this2.setState({
+          searchResultVideoLists: res.data.items,
+          currentVideo: res.data.items[0]
+        });
       });
     }
   }, {
@@ -18336,8 +18344,13 @@ var App = function (_Component) {
         null,
         _react2.default.createElement(
           'div',
+          { className: 'search-bar' },
+          'SEARCHBAR GOES HERE'
+        ),
+        _react2.default.createElement(
+          'div',
           { className: 'video-player' },
-          _react2.default.createElement(_VideoPlayer2.default, { testMessage: this.state.testMessage, currentVideo: this.state.currentVideo })
+          _react2.default.createElement(_VideoPlayer2.default, { currentVideo: this.state.currentVideo })
         )
       );
     }
@@ -18379,18 +18392,13 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var _ytPath = 'https://www.googleapis.com/youtube/v3';
 
 var YoutubeApi = {
-  testAxios: function testAxios(query, callback) {
-    //can delete later.
-    _axios2.default.get('http://foaas.com/awesome/Antonio').then(function (res) {
-      callback(res);
-    });
-  },
 
   getSearchResults: function getSearchResults(query, cb) {
     _axios2.default.get(_ytPath + '/search', {
       params: {
         'maxResults': 5,
         'part': 'snippet, id',
+        'type': 'video',
         'q': query || 'dogs',
         'key': _APIKey2.default
       }
@@ -20023,16 +20031,17 @@ var _react2 = _interopRequireDefault(_react);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var VideoPlayer = function VideoPlayer(props) {
+  console.log(props);
   return _react2.default.createElement(
-    "div",
+    'div',
     null,
     _react2.default.createElement(
-      "h1",
-      null,
-      props.testMessage
+      'h1',
+      { className: 'video-player-title' },
+      props.currentVideo.snippet.title
     ),
-    _react2.default.createElement("iframe", { width: "560", height: "315",
-      src: "https://www.youtube.com/embed/OQSNhk5ICTI",
+    _react2.default.createElement('iframe', { width: "560", height: "315",
+      src: 'https://www.youtube.com/embed/' + props.currentVideo.id.videoId,
       frameborder: "0", allow: "autoplay; encrypted-media" })
   );
 };
