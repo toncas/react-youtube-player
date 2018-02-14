@@ -1,3 +1,5 @@
+client/src/APIKey.js
+
 # Logs
 logs
 *.log
@@ -57,5 +59,4 @@ typings/
 # dotenv environment variables file
 .env
 
-client/src/APIKey.js
 
