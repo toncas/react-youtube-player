@@ -8,6 +8,7 @@ class App extends Component {
     super();
 
     this.state = {
+      testMessage: '',
       currentVideo: {},
       searchResultVideoLists: [],
     };
@@ -15,10 +16,16 @@ class App extends Component {
   }
 
   componentDidMount() {
-    {console.log('Component did mount...')}
-    {youtubeApi.getVideo('thing');}
-
     //set default states
+    youtubeApi.testAxios(null, (res) => {
+      this.setState({
+        testMessage: `${res.data.message} ${res.data.subtitle}`,
+      });
+    });
+
+    youtubeApi.getSearchResults('alpha investments', function(res) {
+      console.log(res);
+    })
 
   }
 
@@ -26,7 +33,7 @@ class App extends Component {
     return (
       <div>
         <div className='video-player'>
-          <VideoPlayer currentVideo={this.state.currentVideo}/>
+          <VideoPlayer testMessage={this.state.testMessage} currentVideo={this.state.currentVideo}/>
         </div>
       </div>
     );
