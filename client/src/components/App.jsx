@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import youtubeApi from './YoutubeApi';
+import youtubeApi from '../YouTube/YoutubeApi';
 import VideoPlayer from './VideoPlayer';
 
 class App extends Component {
@@ -16,6 +16,7 @@ class App extends Component {
 
   componentDidMount() {
     {console.log('Component did mount...')}
+    {youtubeApi.getVideo('thing');}
 
     //set default states
 

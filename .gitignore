@@ -1,4 +1,6 @@
 client/src/YouTube/APIKey.js
+.DS_Store
+client/.DS_Store
 
 # Logs
 logs
