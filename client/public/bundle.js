@@ -18287,6 +18287,14 @@ var _VideoPlayer = __webpack_require__(32);
 
 var _VideoPlayer2 = _interopRequireDefault(_VideoPlayer);
 
+var _Search = __webpack_require__(33);
+
+var _Search2 = _interopRequireDefault(_Search);
+
+var _VideoList = __webpack_require__(34);
+
+var _VideoList2 = _interopRequireDefault(_VideoList);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -18329,11 +18337,18 @@ var App = function (_Component) {
 
       //set default states
 
-      _YoutubeApi2.default.getSearchResults('alpha investments', function (res) {
+      _YoutubeApi2.default.getSearchResults('Drown BMTH', function (res) {
         _this2.setState({
           searchResultVideoLists: res.data.items,
           currentVideo: res.data.items[0]
         });
+      });
+    }
+  }, {
+    key: 'setCurrentVideo',
+    value: function setCurrentVideo(video) {
+      this.setState({
+        currentVideo: video
       });
     }
   }, {
@@ -18342,24 +18357,20 @@ var App = function (_Component) {
       return _react2.default.createElement(
         'div',
         null,
+        _react2.default.createElement(_Search2.default, null),
+        ' ',
+        _react2.default.createElement('br', null),
         _react2.default.createElement(
           'div',
-          { className: 'search-bar' },
-          'SEARCHBAR GOES HERE'
-        ),
-        _react2.default.createElement(
-          'div',
-          { className: 'video-player' },
-          _react2.default.createElement(_VideoPlayer2.default, { currentVideo: this.state.currentVideo })
+          { className: 'container' },
+          _react2.default.createElement(
+            'div',
+            { className: 'row' },
+            _react2.default.createElement(_VideoPlayer2.default, { currentVideo: this.state.currentVideo }),
+            _react2.default.createElement(_VideoList2.default, { videos: this.state.searchResultVideoLists })
+          )
         )
       );
-    }
-  }, {
-    key: 'setCurrentVideo',
-    value: function setCurrentVideo(video) {
-      this.setState({
-        currentVideo: video
-      });
     }
   }]);
 
@@ -20031,12 +20042,11 @@ var _react2 = _interopRequireDefault(_react);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var VideoPlayer = function VideoPlayer(props) {
-  console.log(props);
   return _react2.default.createElement(
     'div',
-    null,
+    { className: 'video-player col-8' },
     _react2.default.createElement(
-      'h1',
+      'h4',
       { className: 'video-player-title' },
       props.currentVideo.snippet.title
     ),
@@ -20047,6 +20057,79 @@ var VideoPlayer = function VideoPlayer(props) {
 };
 
 exports.default = VideoPlayer;
+
+/***/ }),
+/* 33 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = __webpack_require__(2);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var Search = function Search(props) {
+  return _react2.default.createElement(
+    'div',
+    { className: 'search' },
+    _react2.default.createElement(
+      'div',
+      { className: 'input-group' },
+      _react2.default.createElement('input', { type: 'text', className: 'form-control', placeholder: 'Search YouTube...' }),
+      _react2.default.createElement(
+        'span',
+        { className: 'input-group-btn' },
+        _react2.default.createElement(
+          'button',
+          { className: 'btn btn-secondary', type: 'button' },
+          'Search'
+        )
+      )
+    )
+  );
+};
+
+exports.default = Search;
+
+/***/ }),
+/* 34 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = __webpack_require__(2);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var VideoList = function VideoList(props) {
+  return _react2.default.createElement(
+    'div',
+    { className: 'col' },
+    props.videos.map(function (video) {
+      return _react2.default.createElement(
+        'div',
+        null,
+        video.id.videoId
+      );
+    })
+  );
+};
+
+exports.default = VideoList;
 
 /***/ })
 /******/ ]);

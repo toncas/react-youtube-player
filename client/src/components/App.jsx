@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import youtubeApi from '../YouTube/YoutubeApi';
 import VideoPlayer from './VideoPlayer';
+import Search from './Search';
+import VideoList from './VideoList';
 
 class App extends Component {
 
@@ -28,7 +30,7 @@ class App extends Component {
   componentDidMount() {
     //set default states
 
-    youtubeApi.getSearchResults('alpha investments', res => {
+    youtubeApi.getSearchResults('Drown BMTH', res => {
       this.setState({
         searchResultVideoLists: res.data.items,
         currentVideo: res.data.items[0],
@@ -36,23 +38,25 @@ class App extends Component {
     });
   }
 
-  render() {
-    return (
-      <div>
-        <div className='search-bar'>
-          {`SEARCHBAR GOES HERE`}
-        </div>
-        <div className='video-player'>
-          <VideoPlayer currentVideo={this.state.currentVideo}/>
-        </div>
-      </div>
-    );
-  }
-
   setCurrentVideo(video) {
     this.setState({
       currentVideo: video,
     });
+  }
+
+  render() {
+    return (
+      <div>
+        <Search/> <br/>
+        <div className='container'>
+          <div className='row'>
+            <VideoPlayer currentVideo={this.state.currentVideo}/>
+            <VideoList videos={this.state.searchResultVideoLists}/>
+          </div>
+        </div>
+        
+      </div>
+    );
   }
 
 }

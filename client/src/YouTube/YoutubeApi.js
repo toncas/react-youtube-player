@@ -20,4 +20,4 @@ const YoutubeApi = {
   },
 }
 
-export default YoutubeApi
+export default YoutubeApi;
