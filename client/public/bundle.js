@@ -18337,7 +18337,7 @@ var App = function (_Component) {
 
       //set default states
 
-      _YoutubeApi2.default.getSearchResults('Taylor Swift', function (res) {
+      _YoutubeApi2.default.getSearchResults('dogs', function (res) {
         _this2.setState({
           searchResultVideoLists: res.data.items,
           currentVideo: res.data.items[0]

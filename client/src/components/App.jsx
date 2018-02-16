@@ -30,7 +30,7 @@ class App extends Component {
   componentDidMount() {
     //set default states
 
-    youtubeApi.getSearchResults('Taylor Swift', res => {
+    youtubeApi.getSearchResults('dogs', res => {
       this.setState({
         searchResultVideoLists: res.data.items,
         currentVideo: res.data.items[0],
