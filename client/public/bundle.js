@@ -18337,7 +18337,7 @@ var App = function (_Component) {
 
       //set default states
 
-      _YoutubeApi2.default.getSearchResults('Drown BMTH', function (res) {
+      _YoutubeApi2.default.getSearchResults('Taylor Swift', function (res) {
         _this2.setState({
           searchResultVideoLists: res.data.items,
           currentVideo: res.data.items[0]
@@ -18357,9 +18357,13 @@ var App = function (_Component) {
       return _react2.default.createElement(
         'div',
         null,
-        _react2.default.createElement(_Search2.default, null),
-        ' ',
-        _react2.default.createElement('br', null),
+        _react2.default.createElement(
+          'div',
+          { className: 'container' },
+          _react2.default.createElement(_Search2.default, null),
+          ' ',
+          _react2.default.createElement('br', null)
+        ),
         _react2.default.createElement(
           'div',
           { className: 'container' },
@@ -20050,9 +20054,8 @@ var VideoPlayer = function VideoPlayer(props) {
       { className: 'video-player-title' },
       props.currentVideo.snippet.title
     ),
-    _react2.default.createElement('iframe', { width: "560", height: "315",
-      src: 'https://www.youtube.com/embed/' + props.currentVideo.id.videoId,
-      frameborder: "0", allow: "autoplay; encrypted-media" })
+    _react2.default.createElement('iframe', { width: '640', height: '390',
+      src: 'https://www.youtube.com/embed/' + props.currentVideo.id.videoId, allowFullScreen: true })
   );
 };
 
@@ -20113,23 +20116,64 @@ var _react = __webpack_require__(2);
 
 var _react2 = _interopRequireDefault(_react);
 
+var _VideoListEntry = __webpack_require__(35);
+
+var _VideoListEntry2 = _interopRequireDefault(_VideoListEntry);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var VideoList = function VideoList(props) {
   return _react2.default.createElement(
     'div',
-    { className: 'col' },
+    { className: 'col-4' },
     props.videos.map(function (video) {
-      return _react2.default.createElement(
-        'div',
-        null,
-        video.id.videoId
-      );
+      return _react2.default.createElement(_VideoListEntry2.default, { key: video.id.videoId, video: video });
     })
   );
 };
 
 exports.default = VideoList;
+
+/***/ }),
+/* 35 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = __webpack_require__(2);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var VideoListEntry = function VideoListEntry(props) {
+  return _react2.default.createElement(
+    "div",
+    { className: "card", style: { width: "20rem" } },
+    _react2.default.createElement("img", { className: "card-img-top", src: props.video.snippet.thumbnails.medium.url, alt: "Card image cap" }),
+    _react2.default.createElement(
+      "div",
+      { className: "card-block" },
+      _react2.default.createElement(
+        "h4",
+        { className: "card-title" },
+        props.video.snippet.title
+      ),
+      _react2.default.createElement(
+        "p",
+        { className: "card-text" },
+        props.video.snippet.description
+      )
+    )
+  );
+};
+
+exports.default = VideoListEntry;
 
 /***/ })
 /******/ ]);

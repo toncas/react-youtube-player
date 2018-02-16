@@ -30,7 +30,7 @@ class App extends Component {
   componentDidMount() {
     //set default states
 
-    youtubeApi.getSearchResults('Drown BMTH', res => {
+    youtubeApi.getSearchResults('Taylor Swift', res => {
       this.setState({
         searchResultVideoLists: res.data.items,
         currentVideo: res.data.items[0],
@@ -47,7 +47,10 @@ class App extends Component {
   render() {
     return (
       <div>
-        <Search/> <br/>
+        <div className='container' >
+          <Search/> <br/>
+        </div>
+        
         <div className='container'>
           <div className='row'>
             <VideoPlayer currentVideo={this.state.currentVideo}/>
