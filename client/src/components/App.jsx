@@ -27,12 +27,7 @@ class App extends Component {
   componentDidMount() {
     //set default states
 
-    youtubeApi.getSearchResults('dogs', res => {
-      this.setState({
-        searchResultVideoLists: res.data.items,
-        currentVideo: res.data.items[0],
-      });
-    });
+    this.searchVideo('dachshund vs penguin');
   }
 
   setCurrentVideo(video) {
@@ -41,11 +36,21 @@ class App extends Component {
     });
   }
 
+  searchVideo(query) {
+
+    youtubeApi.getSearchResults(query, res => {
+      this.setState({
+        searchResultVideoLists: res.data.items,
+        currentVideo: res.data.items[0],
+      });
+    });
+  }
+
   render() {
     return (
       <div>
         <div className='container' >
-          <Search/> <br/>
+          <Search searchVideo={this.searchVideo.bind(this)}/><br/>
         </div>
         
         <div className='container'>
