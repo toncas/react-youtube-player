@@ -18324,9 +18324,6 @@ var App = function (_Component) {
       },
       searchResultVideoLists: []
     };
-
-    _YoutubeApi2.default.getSearchResults.bind(_this);
-
     return _this;
   }
 
@@ -18371,7 +18368,7 @@ var App = function (_Component) {
             'div',
             { className: 'row' },
             _react2.default.createElement(_VideoPlayer2.default, { currentVideo: this.state.currentVideo }),
-            _react2.default.createElement(_VideoList2.default, { videos: this.state.searchResultVideoLists })
+            _react2.default.createElement(_VideoList2.default, { setCurrentVideo: this.setCurrentVideo.bind(this), videos: this.state.searchResultVideoLists })
           )
         )
       );
@@ -20127,7 +20124,7 @@ var VideoList = function VideoList(props) {
     'div',
     { className: 'col-4' },
     props.videos.map(function (video) {
-      return _react2.default.createElement(_VideoListEntry2.default, { key: video.id.videoId, video: video });
+      return _react2.default.createElement(_VideoListEntry2.default, { setCurrentVideo: props.setCurrentVideo, key: video.id.videoId, video: video });
     })
   );
 };
@@ -20152,9 +20149,12 @@ var _react2 = _interopRequireDefault(_react);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var VideoListEntry = function VideoListEntry(props) {
+
   return _react2.default.createElement(
     "div",
-    { className: "card", style: { width: "20rem" } },
+    { onClick: function onClick() {
+        return props.setCurrentVideo(props.video);
+      }, className: "card", style: { width: "20rem" } },
     _react2.default.createElement("img", { className: "card-img-top", src: props.video.snippet.thumbnails.medium.url, alt: "Card image cap" }),
     _react2.default.createElement(
       "div",

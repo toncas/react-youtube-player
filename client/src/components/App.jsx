@@ -22,9 +22,6 @@ class App extends Component {
       },
       searchResultVideoLists: [],
     };
-
-    youtubeApi.getSearchResults.bind(this);
-
   }
 
   componentDidMount() {
@@ -54,7 +51,7 @@ class App extends Component {
         <div className='container'>
           <div className='row'>
             <VideoPlayer currentVideo={this.state.currentVideo}/>
-            <VideoList videos={this.state.searchResultVideoLists}/>
+            <VideoList setCurrentVideo={this.setCurrentVideo.bind(this)} videos={this.state.searchResultVideoLists}/>
           </div>
         </div>
         
